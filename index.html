@@ -1,14 +1,556 @@
-<!doctype html>
-<html class="no-js" lang="">
+[2:26 p.m., 1/5/2025] Sebastian Sánchez: <!DOCTYPE html>
+<html lang="es">
 
-<head></head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Control de Versiones: Local vs. Remoto</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f6f9;
+      color: #333;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 1.5rem;
+      color: #2d3748;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: #2d3748;
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 0.5rem;
+    }
+
+    h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.75rem;
+      color: #4a5568;
+      text-align: center;
+    }
+
+    p {
+      font-size: 1.1rem;
+      color: #4a5568;
+      margin-bottom: 1rem;
+    }
+
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+      margin-left: 0;
+    }
+
+    ul li {
+      margin-bottom: 0.5rem;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+
+    ul li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: #48bb78;
+    }
+
+    /* Versus Section Styles */
+    .versus-section {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .versus-card {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      padding: 1.5rem;
+      transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    }
+
+    .versus-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .versus-card h3 {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .versus-icon {
+      font-size: 1.5rem;
+      color: #4299e1;
+    }
+
+    .local-icon {
+      color: #63b3ed;
+    }
+
+    .remote-icon {
+      color: #48bb78;
+    }
+
+    /* Table Styles */
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .comparison-table th,
+    .comparison-table td {
+      padding: 0.75rem;
+      text-align: left;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .comparison-table th {
+      background-color: #edf2f7;
+      font-weight: 600;
+      color: #2d3748;
+    }
+
+    .comparison-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .comparison-table tr:nth-child(even) {
+      background-color: #f7fafc;
+    }
+
+    .comparison-table tr:hover {
+      background-color: #ebf4ff;
+    }
+
+    .conclusion {
+      font-style: italic;
+      color: #718096;
+      text-align: center;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
 
 <body>
+<div class="container">
+  <h1>Control de Versiones: Local vs. Remoto</h1>
+  <p>
+    El control de versiones es una práctica fundamental en el desarrollo de software, que permite gestionar los cambios en el código a lo largo
+    del tiempo. En este documento, exploraremos en detalle las diferencias entre los sistemas de control de versiones locales y remotos, sus
+    características, ventajas y desventajas.
+  </p>
 
-  <!-- Add your site or application content here -->
-  <p>Hello world! This is HTML5 Boilerplate.</p>
-  <script src="js/app.js"></script>
+  <section class="versus-section">
+    <div class="versus-card">
+      <h3><i class="fas fa-hdd local-icon versus-icon"></i> Control de Versiones Local</h3>
+      <p>
+        Un sistema de control de versiones local (VCS) se ejecuta en la computadora de un desarrollador. Realiza un seguimiento de todos
+        los cambios en los archivos del proyecto directamente en el sistema de archivos local.
+      </p>
+      <ul>
+        <li><strong>Almacenamiento Local:</strong> Todos los archivos e historial de versiones se almacenan en la máquina del desarrollador.</li>
+        <li><strong>Operaciones Offline:</strong> Funciona completamente sin conexión a internet.</li>
+        <li><strong>Uso Individual:</strong> Ideal para proyectos personales, experimentos o cuando se trabaja de forma aislada.</li>
+        <li><strong>Rendimiento:</strong> Generalmente más rápido para la mayoría de las operaciones, ya que no hay latencia de red.</li>
+        <li><strong>Ejemplo:</strong> Git (usado localmente)</li>
+      </ul>
+    </div>
 
-</body>
+    <div class="versus-card">
+      <h3><i class="fas fa-cloud remote-icon versus-icon"></i> Control de Versiones Remoto</h3>
+      <p>
+        Un sistema de control de versiones remoto aloja los archivos del proyecto y su historial en un servidor centralizado. Los
+        desarrolladores interactúan con este repositorio central para compartir cambios y colaborar.
+      </p>
+      <ul>
+        <li><strong>Almacenamiento Centralizado:</strong> Los archivos e historial se almacenan en un servidor remoto.</li>
+        <li><strong>Requiere Conexión:</strong> Se requiere conexión a internet para la mayoría de las operaciones.</li>
+        <li><strong>Colaboración en Equipo:</strong> Facilita la colaboración entre varios desarrolladores en diferentes máquinas.</li>
+        <li><strong>Copia de Seguridad y Centralización:</strong> Proporciona una copia de seguridad centralizada del código y un punto único
+          de verdad.
+          …
+          [2:27 p.m., 1/5/2025] Sebastian Sánchez: control-versiones-local-remoto.html:
+          [2:30 p.m., 1/5/2025] Sebastian Sánchez: <!DOCTYPE html>
+          <html lang="es">
 
-</html>
+          <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Herramientas de Desarrollo</title>
+            <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <style>
+              body {
+                font-family: 'Inter', sans-serif;
+                line-height: 1.6;
+                margin: 0;
+                padding: 0;
+                background-color: #f4f6f9;
+                color: #333;
+              }
+
+              .container {
+                max-width: 1100px;
+                margin: 2rem auto;
+                padding: 2rem;
+                background-color: #fff;
+                border-radius: 12px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+              }
+
+              h1 {
+                font-size: 2.5rem;
+                text-align: center;
+                margin-bottom: 1.5rem;
+                color: #2d3748;
+              }
+
+              h2 {
+                font-size: 2rem;
+                margin-bottom: 1rem;
+                color: #2d3748;
+                border-bottom: 2px solid #e2e8f0;
+                padding-bottom: 0.5rem;
+              }
+
+              h3 {
+                font-size: 1.5rem;
+                margin-bottom: 0.75rem;
+                color: #4a5568;
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+              }
+
+              p {
+                font-size: 1.1rem;
+                color: #4a5568;
+                margin-bottom: 1rem;
+              }
+
+              ul,
+              ol {
+                margin-left: 2rem;
+                margin-bottom: 1rem;
+              }
+
+              li {
+                margin-bottom: 0.5rem;
+              }
+
+              /* Tool Card Styles */
+              .tool-card {
+                background-color: #fff;
+                border-radius: 8px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+                margin-bottom: 1.5rem;
+                padding: 1.5rem;
+                transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+              }
+
+              .tool-card:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+              }
+
+              .tool-icon {
+                font-size: 1.2rem;
+                color: #4299e1;
+              }
+
+              /* Table Styles */
+              .tool-table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 1rem;
+                margin-bottom: 1.5rem;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                border-radius: 8px;
+                overflow: hidden;
+              }
+
+              .tool-table th,
+              .tool-table td {
+                padding: 0.75rem;
+                text-align: left;
+                border-bottom: 1px solid #e2e8f0;
+              }
+
+              .tool-table th {
+                background-color: #edf2f7;
+                font-weight: 600;
+                color: #2d3748;
+              }
+
+              .tool-table tr:last-child td {
+                border-bottom: none;
+              }
+
+              .tool-table tr:nth-child(even) {
+                background-color: #f7fafc;
+              }
+
+              .tool-table tr:hover {
+                background-color: #ebf4ff;
+              }
+
+              /* Section Styles */
+              .tool-section {
+                margin-bottom: 2rem;
+              }
+
+              .tool-section h2 {
+                border-bottom: 2px solid #e2e8f0;
+                padding-bottom: 0.5rem;
+              }
+
+              .tool-list {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 1rem;
+              }
+            </style>
+          </head>
+
+          <body>
+          <div class="container">
+            <h1>Herramientas de Desarrollo de Software</h1>
+            <p>
+              La elección de las herramientas de desarrollo adecuadas es crucial para la eficiencia y el éxito de un proyecto de software. A continuación, se
+              describen algunas de las herramientas esenciales utilizadas en el proceso de desarrollo:
+            </p>
+
+            <section class="tool-section">
+              <h2>Entornos de Desarrollo Integrado (IDEs)</h2>
+              <p>
+                Los IDEs proporcionan un entorno completo para los desarrolladores, facilitando la escritura, depuración y gestión del código.
+              </p>
+              <div class="tool-list">
+                <div class="tool-card">
+                  <h3><i class="fas fa-code tool-icon"></i> Visual Studio Code</h3>
+                  <p>
+                    Un editor de código ligero pero potente, desarrollado por Microsoft. Soporta una amplia variedad de lenguajes a través de extensiones,
+                    incluyendo JavaScript, TypeScript, Python, Java, C++, y más. Ofrece características como autocompletado, depuración integrada, control de
+                    versiones Git, y un rico ecosistema de extensiones.
+                  </p>
+                </div>
+
+                <div class="tool-card">
+                  <h3><i class="fas fa-code tool-icon"></i> IntelliJ IDEA</h3>
+                  <p>
+                    Un IDE desarrollado por JetBrains, especialmente popular para el desarrollo en Java. Ofrece características avanzadas como análisis de
+                    código inteligente, refactorización, depuración, y soporte para frameworks como Spring y Hibernate. También tiene versiones para otros
+                    lenguajes como Python (PyCharm), JavaScript (WebStorm), y C++ (CLion).
+                  </p>
+                </div>
+
+                <div class="tool-card">
+                  <h3><i class="fas fa-code tool-icon"></i> Eclipse</h3>
+                  <p>
+                    Un IDE de código abierto, ampliamente utilizado para el desarrollo en Java. Es altamente personalizable a través de plugins y soporta otros
+                    lenguajes como C++, PHP, y Python. Eclipse ofrece potentes herramientas de depuración, refactorización y gestión de proyectos.
+                  </p>
+                </div>
+              </div>
+            </section>
+
+            <section class="tool-section">
+              <h2>Lenguajes de Programación</h2>
+              <p>
+                Los lenguajes de programación son la base del desarrollo de software, permitiendo a los desarrolladores comunicarse con las computadoras.
+              </p>
+              <div class="tool-list">
+                <div class="tool-card">
+                  <h3><i class="fas fa-code tool-icon"></i> JavaScript</h3>
+                  <p>
+                    Un lenguaje de scripting ampliamente utilizado para el desarrollo web front-end y back-end. Se ejecuta en el navegador del cliente para
+                    crear interfaces de usuario interactivas y también se puede utilizar en el servidor con Node.js.
+                  </p>
+                </div>
+
+                <div class="tool-card">
+                  <h3><i class="fas fa-code tool-icon"></i> Python</h3>
+                  <p>
+                    Un lenguaje de programación de alto nivel, interpretado y de propósito general. Es conocido por su sintaxis clara y legible, lo que lo
+                    hace popular para el desarrollo web, la ciencia de datos, el aprendizaje automático y la automatización.
+                  </p>
+                </div>
+
+                <div class="tool-card">
+                  <h3><i class="fas fa-code tool-icon"></i> Java</h3>
+                  <p>
+                    Un lenguaje de programación orientado a objetos, desarrollado por Sun Microsystems (ahora Oracle). Es conocido por su portabilidad
+                    ("escribir una vez, ejecutar en cualquier lugar") y se utiliza ampliamente en aplicaciones empresariales, aplicaciones Android y sistemas a
+                    gran escala.
+                  </p>
+                </div>
+
+                <div class="tool-card">
+                  <h3><i class="fas fa-code tool-icon"></i> C#</h3>
+                  <p>
+                    Un lenguaje de programación multiparadigma, desarrollado por Microsoft como parte de la plataforma .NET. Es ampliamente utilizado para
+                    el desarrollo de aplicaciones de escritorio de Windows, aplicaciones web con ASP.NET, y juegos con Unity.
+                  </p>
+                </div>
+              </div>
+            </section>
+
+            <section class="tool-section">
+              <h2>Frameworks</h2>
+              <p>
+                Los frameworks proporcionan una estructura y un conjunto de herramientas para simplificar el desarrollo de aplicaciones.
+              </p>
+              <div class="tool-list">
+                <div class="tool-card">
+                  <h3><i class="fas fa-code tool-icon"></i> React</h3>
+                  <p>
+                    Una biblioteca de JavaScript para construir interfaces de usuario. Es mantenida por Facebook y una comunidad de desarrolladores. React
+                    utiliza un enfoque basado en componentes y un DOM virtual para mejorar el rendimiento.
+                  </p>
+                </div>
+
+                <div class="tool-card">
+                  <h3><i class="fas fa-code tool-icon"></i> Angular</h3>
+                  <p>
+                    Un framework de desarrollo web front-end, desarrollado por Google. Es un framework completo que proporciona una arquitectura para
+                    construir aplicaciones web complejas.
+                  </p>
+                </div>
+
+                <div class="tool-card">
+                  <h3><i class="fas fa-code tool-icon"></i> Vue.js</h3>
+                  <p>
+                    Un framework de JavaScript progresivo para construir interfaces de usuario. Es conocido por su simplicidad, flexibilidad y facilidad de
+                    integración con otros proyectos.
+                  </p>
+                </div>
+
+                <div class="tool-card">
+                  <h3><i class="fas fa-code tool-icon"></i> Node.js</h3>
+                  <p>
+                    Un entorno de ejecución de JavaScript del lado del servidor. Permite a los desarrolladores utilizar JavaScript para construir
+                    aplicaciones back-end escalables y de alto rendimiento.
+                  </p>
+                </div>
+
+                <div class="tool-card">
+                  <h3><i class="fas fa-code tool-icon"></i> Spring</h3>
+                  <p>
+                    Un framework de desarrollo de aplicaciones Java de código abierto. Proporciona una infraestructura completa para construir
+                    aplicaciones empresariales robustas y escalables.
+                  </p>
+                </div>
+
+                <div class="tool-card">
+                  <h3><i class="fas fa-code tool-icon"></i> ASP.NET</h3>
+                  <p>
+                    Un framework de desarrollo web, desarrollado por Microsoft, para construir aplicaciones web dinámicas, sitios web y servicios web.
+                  </p>
+                </div>
+              </div>
+            </section>
+
+            <section class="tool-section">
+              <h2>Bases de Datos</h2>
+              <p>
+                Las bases de datos son sistemas que permiten almacenar y recuperar datos de manera eficiente.
+              </p>
+              <div class="tool-list">
+                <div class="tool-card">
+                  <h3><i class="fas fa-database tool-icon"></i> MySQL</h3>
+                  <p>
+                    Un sistema de gestión de bases de datos relacional (RDBMS) de código abierto. Es ampliamente utilizado para aplicaciones web y es parte
+                    de la pila LAMP (Linux, Apache, MySQL, PHP/Python/Perl).
+                  </p>
+                </div>
+
+                <div class="tool-card">
+                  <h3><i class="fas fa-database tool-icon"></i> PostgreSQL</h3>
+                  <p>
+                    Un RDBMS de código abierto, conocido por su robustez, cumplimiento de los estándares SQL y características avanzadas. Es popular para
+                    aplicaciones que requieren alta integridad de datos y escalabilidad.
+                  </p>
+                </div>
+
+                <div class="tool-card">
+                  <h3><i class="fas fa-database tool-icon"></i> MongoDB</h3>
+                  <p>
+                    Un sistema de base de datos NoSQL orientado a documentos. Es conocido por su flexibilidad y escalabilidad, y es adecuado para
+                    aplicaciones que manejan grandes volúmenes de datos no estructurados.
+                  </p>
+                </div>
+              </div>
+            </section>
+
+            <section class="tool-section">
+              <h2>Otras Herramientas</h2>
+              <p>
+                Además de las categorías anteriores, existen otras herramientas importantes en el desarrollo de software.
+              </p>
+              <div class="tool-list">
+                <div class="tool-card">
+                  <h3><i class="fas fa-code-branch tool-icon"></i> Git</h3>
+                  <p>
+                    Un sistema de control de versiones distribuido. Permite a los desarrolladores realizar un seguimiento de los cambios en el código,
+                    colaborar en proyectos y gestionar diferentes versiones del software.
+                  </p>
+                </div>
+
+                <div class="tool-card">
+                  <h3><i class="fab fa-docker tool-icon"></i> Docker</h3>
+                  <p>
+                    Una plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores. Permite a los desarrolladores empaquetar una
+                    aplicación con todas sus dependencias en un contenedor estandarizado, lo que garantiza que la aplicación funcione de manera
+                    consistente en diferentes entornos.
+                  </p>
+                </div>
+
+                <div class="tool-card">
+                  <h3><i class="fas fa-box tool-icon"></i> npm/Yarn</h3>
+                  <p>
+                    Administradores de paquetes para JavaScript. Facilitan la instalación, actualización y gestión de bibliotecas y dependencias de
+                    JavaScript.
+                  </p>
+                </div>
+              </div>
+            </section>
+
+            <p>
+              Esta es solo una muestra de las muchas herramientas disponibles para los desarrolladores de software. La elección de las herramientas
+              adecuadas depende de los requisitos específicos del proyecto, el tipo de aplicación que se está desarrollando y las preferencias del equipo de
+              desarrollo.
+            </p>
+          </div>
+          </body>
+
+          </html>
+
